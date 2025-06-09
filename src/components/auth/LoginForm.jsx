@@ -10,18 +10,17 @@ const LoginForm = ({ onLoginSuccess }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    // Basic validation
+
     if (!studentId || !password) {
       setError("Please enter both Student ID/Email and Password.");
       return;
     }
-    // --- TODO: Implement actual login logic here ---
-    // For now, simulate successful login
+
+    // Simulate login (replace with real API call)
     console.log("Logging in with:", { studentId, password });
-    // Simulate API call
+
     setTimeout(() => {
-      // Assuming login is successful:
-      onLoginSuccess();
+      onLoginSuccess(); // Replace this with actual auth response
     }, 500);
   };
 
@@ -30,14 +29,16 @@ const LoginForm = ({ onLoginSuccess }) => {
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
         Student Login
       </h2>
+
       {error && (
         <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
       )}
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label
             htmlFor="studentId"
-            className="block text-sm font-medium text-gray-700 sr-only"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Student ID / Email
           </label>
@@ -45,15 +46,17 @@ const LoginForm = ({ onLoginSuccess }) => {
             type="text"
             name="studentId"
             id="studentId"
+            autoComplete="username"
             placeholder="Enter your student ID or email"
             value={studentId}
             onChange={(e) => setStudentId(e.target.value)}
           />
         </div>
+
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700 sr-only"
+            className="block text-sm font-medium text-gray-700 mb-1"
           >
             Password
           </label>
@@ -61,11 +64,13 @@ const LoginForm = ({ onLoginSuccess }) => {
             type="password"
             name="password"
             id="password"
+            autoComplete="current-password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <div>
           <Button type="submit" variant="primary" className="w-full">
             Login
